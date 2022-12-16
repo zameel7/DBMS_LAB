@@ -1,0 +1,25 @@
+Function:
+
+CREATE [OR REPLACE] FUNCTION function_name  
+   [ (parameter [,parameter]) ]  
+RETURN return_datatype  
+IS | AS  
+ [declaration_section]  
+BEGIN  
+   executable_section  
+[EXCEPTION  
+   exception_section]  
+END [function_name];  
+
+
+Procedure:
+
+CREATE [OR REPLACE] PROCEDURE procedure_name  
+    [ (parameter [,parameter]) ]  
+IS  
+    [declaration_section]  
+BEGIN  
+    executable_section  
+[EXCEPTION  
+    exception_section]  
+END [procedure_name];  

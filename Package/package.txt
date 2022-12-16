@@ -1,0 +1,56 @@
+Package:
+
+CREATE OR REPLACE PACKAGE pack
+AS
+	FUNCTION tmark(rno NUMBER) RETURN NUMBER;
+	PROCEDURE grade(r in NUMBER);
+END;
+
+
+Package Body:
+
+CREATE OR REPLACE PACKAGE BODY pack
+AS
+	FUNCTION tmark(rno NUMBER)
+	RETURN NUMBER AS
+		tx number;
+		i fstudent%rowtype;
+	BEGIN
+		SELECT physics_mark, chemistry_mark, maths_mark INTO i.physics_mark, i.chemistry_mark, i.maths_mark FROM fstudent WHERE reg_no=rno;
+		tx:=i.physics_mark+i.chemistry_mark+i.maths_mark;
+		return tx;
+	END tmark;
+	PROCEDURE grade(r in number)
+	IS
+		t number;
+	BEGIN
+		SELECT physics_mark+chemistry_mark+maths_mark INTO t FROM fstudent WHERE reg_no=r;
+		t:=t/150*100;
+		dbms_output.put_line('Percentage: '||t);
+		if t>=80 and t<=100
+		then
+			dbms_output.put_line('Grade: A');
+		elsif t>=70 and t<80
+		then
+			dbms_output.put_line('Grade: B');
+		elsif t>=50 and t<70
+		then
+			dbms_output.put_line('Grade: B');
+		elsif t<50
+		then
+			dbms_output.put_line('Grade: Fail');
+		end if;
+	END grade;
+END;
+
+
+Package call: 
+
+DECLARE
+	r NUMBER:=&r;
+	t NUMBER;
+BEGIN
+	t:=pack.tmark(r);
+	dbms_output.put_line('Total Marks: '||t);
+	pack.grade(r);
+END;
