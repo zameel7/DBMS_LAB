@@ -1,12 +1,15 @@
 We have three sections:
+
 	- declare
-		syntax: a number;
+		syntax: 
+      a number;
 	
 	- begin 
-		syntax: a:=&a;
+		syntax: 
+      a:=&a;
 			b:=&b;
 			c:=a+b;
-			dbms-output put_line('sum'||c);
+			dbms_output.put_line('sum'||c);
 	- end;
 
 (to display output: set serveroutput on;)
